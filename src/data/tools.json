@@ -1,35 +1,22 @@
 [
   {
     "id": "ai-seo-title-generator",
-    "name": "AI SEOタイトル＆キャッチコピー自動生成器",
-    "description": "検索順位とクリック率（CTR）を最大化するSEOタイトルとSNS用キャッチコピーを瞬時にAIが無料自動生成します。",
+    "name": "SEOタイトル＆キャッチコピーAI生成ツール",
+    "description": "検索順位とクリック率（CTR）を最大化するSEOタイトルとSNS用キャッチコピーを瞬時に生成します。",
     "icon": "Sparkles",
-    "usageCount": 3840,
     "isPremium": false,
     "inputLabel": "ターゲットキーワード・トピック",
-    "placeholder": "例：AI副業 自動化 2026",
+    "placeholder": "例：AI自動化 副業 2026",
     "systemPrompt": "与えられたキーワードに基づいて、検索クリック率が最も高くなる魅力的なSEOタイトル3パターンと、SNS投稿用のキャッチコピー2パターンを生成してください。"
   },
   {
     "id": "ai-text-proofreader",
-    "name": "AI文章校正＆景表法・ステマ表現チェッカー",
-    "description": "文章の誤字脱字チェックに加え、景表法・薬機法・ステマ規制に抵触する可能性があるリスク表現をAIが自動分析・指摘します。",
+    "name": "文章校正＆表現分析AIツール",
+    "description": "文章の誤字脱字チェックに加え、より自然で読みやすい表現への推敲とアドバイスを出力します。",
     "icon": "ShieldCheck",
-    "usageCount": 2190,
     "isPremium": false,
-    "inputLabel": "チェックしたい文章・広告テキスト",
-    "placeholder": "校正・リーガルチェックしたい文章を入力してください...",
-    "systemPrompt": "入力されたテキストの誤字脱字を修正し、景表法・特定商取引法・著作権リスク（過度な誇大表現やステマ誤認表現）をチェックしてアドバイスを生成してください。"
-  },
-  {
-    "id": "ai-saas-monetize-architect",
-    "name": "AI自動マネタイズ・ビジネスモデル診断機（Pro）",
-    "description": "あなたのアイデアや所有アセットから、人的リソース0・初期費用0で始められる最適な自動収益システム設計図を自動出力。",
-    "icon": "Zap",
-    "usageCount": 1560,
-    "isPremium": true,
-    "inputLabel": "あなたの興味・スキル・ジャンル",
-    "placeholder": "例：プログラミング、SNS運用、美容、投資など",
-    "systemPrompt": "ユーザーの指定分野において、人的リソース0・法的リスク0・初期経費0・完全自動化で月10万〜100万円を達成する具体的なAIマネタイズモデルを設計してください。"
+    "inputLabel": "チェックしたい文章・テキスト",
+    "placeholder": "校正したい文章を入力してください...",
+    "systemPrompt": "入力されたテキストの誤字脱字を修正し、表現のアドバイスを生成してください。"
   }
 ]
