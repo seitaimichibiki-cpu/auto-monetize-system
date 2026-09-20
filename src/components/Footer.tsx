@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { ShieldCheck, Scale, Lock, Heart } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
@@ -8,42 +8,39 @@ export const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           
-          <div className="md:col-span-2">
-            <span className="text-base font-bold gradient-text">AutoMonetize AI Platform</span>
-            <p className="text-xs text-slate-400 mt-2 max-w-sm leading-relaxed">
-              人的リソース0・法的リスク0・初期経費0を達成するために設計された完全自律型マイクロSaaS＆情報プラットフォーム。24時間365日無人で自動運用されています。
+          <div className="md:col-span-2 space-y-3">
+            <span className="text-base font-bold text-white">AI Tech Insights</span>
+            <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
+              ビジネスと開発の生産性を最大化する最新AIテクノロジー、活用ノウハウ、実用Webツールを提供する専門メディアプラットフォームです。
             </p>
-            <div className="flex items-center gap-2 mt-4 text-[11px] text-emerald-400 font-mono">
-              <ShieldCheck className="w-4 h-4" />
-              <span>景表法・著作権法（第30条の4）・特商法 完全準拠</span>
+            <div className="flex items-center gap-1.5 text-[11px] text-slate-500 font-mono">
+              <ShieldCheck className="w-3.5 h-3.5 text-blue-400" />
+              <span>特定商取引法・景表法（PR表記方針）準拠</span>
             </div>
           </div>
 
           <div>
-            <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider mb-3">サービス</h4>
+            <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider mb-3">ナビゲーション</h4>
             <ul className="space-y-2 text-xs">
-              <li><Link href="/tools" className="hover:text-white transition-colors">無料AIマイクロツール</Link></li>
-              <li><Link href="/blog" className="hover:text-white transition-colors">AIトレンド自動メディア</Link></li>
-              <li><Link href="/dashboard" className="hover:text-white transition-colors">自動化モニタリング</Link></li>
+              <li><Link href="/tools" className="hover:text-white transition-colors">AI無料Webツール</Link></li>
+              <li><Link href="/blog" className="hover:text-white transition-colors">最新技術・解説記事</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider mb-3">リーガル・コンプライアンス</h4>
-            <ul className="space-y-2 text-xs">
-              <li className="flex items-center gap-1"><Scale className="w-3 h-3" /><span className="hover:text-white cursor-pointer">特定商取引法に基づく表記</span></li>
-              <li className="flex items-center gap-1"><Lock className="w-3 h-3" /><span className="hover:text-white cursor-pointer">プライバシーポリシー</span></li>
-              <li className="text-[11px] text-slate-500 mt-2">PR表記自動プログラム組み込み済</li>
+            <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider mb-3">リーガル情報</h4>
+            <ul className="space-y-2 text-xs text-slate-500">
+              <li>特定商取引法に基づく表記</li>
+              <li>プライバシーポリシー</li>
+              <li>利用規約 / 免責事項</li>
             </ul>
           </div>
 
         </div>
 
         <div className="border-t border-slate-900 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
-          <p>© 2026 AutoMonetize AI. Built for 100% Autonomous Monetization.</p>
-          <p className="flex items-center gap-1 mt-2 sm:mt-0 font-mono text-[10px]">
-            Powered by Next.js & Gemini 3.6 API
-          </p>
+          <p>© 2026 AI Tech Insights. All rights reserved.</p>
+          <p className="text-[11px] text-slate-600">※ 当メディアのコンテンツには一部PR広告が含まれる場合があります。</p>
         </div>
       </div>
     </footer>
