@@ -18,19 +18,19 @@ export interface FinalMonetizedPost extends GeneratedPostContent {
 const AFFILIATE_OFFER_POOL = [
   {
     title: '【完全放置対応】AI自動化クラウドAPI 30日間無料体験',
-    url: 'https://example.com/affiliate-ai-cloud',
+    url: process.env.AFFILIATE_LINK_1 || 'https://a8.net/', // A8.net等の本物のアフィリエイトリンクを設定可能
     sponsor: 'Global AI Cloud Solutions',
     priceInfo: '初期費用0円・無料枠あり'
   },
   {
     title: '【開発者向け】NoCode / Codeレス自動化サーバー割引クーポン',
-    url: 'https://example.com/affiliate-nocode-server',
+    url: process.env.AFFILIATE_LINK_2 || 'https://www.afb.co.jp/',
     sponsor: 'Serverless Automation Inc.',
     priceInfo: '初月実質0円〜'
   },
   {
     title: '【収益最大化】AIマイクロスーSaaS構築スターターキット',
-    url: 'https://example.com/affiliate-saas-kit',
+    url: process.env.AFFILIATE_LINK_3 || 'https://infotop.jp/',
     sponsor: 'SaaS Creator Lab',
     priceInfo: '特別オファー中'
   }
