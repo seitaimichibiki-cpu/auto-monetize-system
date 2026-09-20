@@ -1,0 +1,37 @@
+name: 24/7 AI Autonomous Monetization Pipeline
+
+on:
+  schedule:
+    # 毎日 午前9時 (UTC 0:00) に完全自動実行
+    - cron: '0 0 * * *'
+  workflow_dispatch: # 手動でのテストトリガーも可能
+
+jobs:
+  auto-monetize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run AI Autonomous Engine Pipeline
+        run: npm run auto-engine
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+      - name: Auto-Commit & Push Updated Content & Analytics
+        run: |
+          git config --global user.name 'AI Autonomous Bot'
+          git config --global user.email 'bot@auto-monetize.local'
+          git add src/data/
+          git status
+          git diff-index --quiet HEAD || git commit -m "auto: publish daily AI monetized content and update analytics"
+          git push
