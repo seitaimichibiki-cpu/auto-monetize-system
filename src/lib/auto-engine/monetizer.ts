@@ -17,43 +17,43 @@ export interface FinalMonetizedPost extends GeneratedPostContent {
 
 const AFFILIATE_OFFER_POOL = [
   {
-    title: '【公式】お名前.com 高速レンタルサーバー（月額利用無料枠あり）',
+    title: '【公式】お名前.com 高速レンタルサーバー',
     url: 'https://px.a8.net/svt/ejp?a8mat=4BCFNP+7LVF1U+50+35CAFM',
     sponsor: 'GMOインターネットグループ（お名前.com）',
     priceInfo: '初期費用0円・超高速SSDサーバー'
   },
   {
-    title: '【話題のAIデバイス】PLAUD NOTE - 6ヶ月で5万ユーザー突破のAIボイスレコーダー',
+    title: '【話題のAIデバイス】PLAUD NOTE - AIボイスレコーダー',
     url: 'https://px.a8.net/svt/ejp?a8mat=4BCFNP+AMTQR6+5J4W+5YRHE',
     sponsor: 'PLAUD NOTE Japan',
     priceInfo: 'AI自動文字起こし＆要約機能搭載'
   },
   {
-    title: '【最新AI画像編集】Aiarty Image Enhancer - 超高速AI高画質化ツール',
+    title: '【最新AI画像編集】Aiarty Image Enhancer - 高画質化ツール',
     url: 'https://px.a8.net/svt/ejp?a8mat=4BCFNP+ANF6CY+428G+HVFKY',
     sponsor: 'Aiarty Software',
     priceInfo: 'AIノイズ除去・4K/8K高画質化'
   },
   {
-    title: '【安全・高速通信】ExpressVPN - AI自動化・開発専用高速セキュリティVPN',
+    title: '【安全・高速通信】ExpressVPN - 高速セキュリティVPN',
     url: 'https://px.a8.net/svt/ejp?a8mat=4BCFNP+AO0LYQ+5JSS+5YRHE',
     sponsor: 'ExpressVPN International',
-    priceInfo: '30日間返金保証・高速セキュリティ'
+    priceInfo: '30日間返金保証あり'
   },
   {
-    title: '【AI・IT就職】Neuro Dive - AI・データサイエンス特化の専門支援',
+    title: '【AI・IT就職】Neuro Dive - AI・データサイエンス特化支援',
     url: 'https://px.a8.net/svt/ejp?a8mat=4BCFNP+BBTY5U+47GS+HV7V6',
     sponsor: 'Neuro Dive（IT・AI特化支援）',
-    priceInfo: '最新AIスキル習得・就職サポート'
+    priceInfo: '最新AIスキル習得・キャリアサポート'
   },
   {
-    title: '【無料登録】注目の最新AI＆ITプラットフォーム無料体験枠',
+    title: '【IT・AIサービス】注目の最新AI＆ITプラットフォーム',
     url: 'https://px.a8.net/svt/ejp?a8mat=4BCFNP+B8US4Y+2PEO+1HMAQQ',
     sponsor: 'IT・AIパートナーズ',
-    priceInfo: '完全無料登録・限定特典付き'
+    priceInfo: '公式詳細・限定特典案内あり'
   },
   {
-    title: '【ドメイン短縮】お名前.com ドメイン・スリム化公式サービス',
+    title: '【ドメイン活用】お名前.com ドメイン・スリム化公式サービス',
     url: 'https://px.a8.net/svt/ejp?a8mat=4BCFNP+70FT9U+50+2HDT1U',
     sponsor: 'GMOインターネットグループ',
     priceInfo: '短縮ドメイン・ブランディング最適化'
