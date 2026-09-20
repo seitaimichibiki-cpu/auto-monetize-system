@@ -39,6 +39,24 @@ const AFFILIATE_OFFER_POOL = [
     url: 'https://px.a8.net/svt/ejp?a8mat=4BCFNP+AO0LYQ+5JSS+5YRHE',
     sponsor: 'ExpressVPN International',
     priceInfo: '30日間返金保証・高速セキュリティ'
+  },
+  {
+    title: '【AI・IT就職】Neuro Dive - AI・データサイエンス特化の専門支援',
+    url: 'https://px.a8.net/svt/ejp?a8mat=4BCFNP+BBTY5U+47GS+HV7V6',
+    sponsor: 'Neuro Dive（IT・AI特化支援）',
+    priceInfo: '最新AIスキル習得・就職サポート'
+  },
+  {
+    title: '【無料登録】注目の最新AI＆ITプラットフォーム無料体験枠',
+    url: 'https://px.a8.net/svt/ejp?a8mat=4BCFNP+B8US4Y+2PEO+1HMAQQ',
+    sponsor: 'IT・AIパートナーズ',
+    priceInfo: '完全無料登録・限定特典付き'
+  },
+  {
+    title: '【ドメイン短縮】お名前.com ドメイン・スリム化公式サービス',
+    url: 'https://px.a8.net/svt/ejp?a8mat=4BCFNP+70FT9U+50+2HDT1U',
+    sponsor: 'GMOインターネットグループ',
+    priceInfo: '短縮ドメイン・ブランディング最適化'
   }
 ];
 
