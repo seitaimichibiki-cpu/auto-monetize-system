@@ -84,30 +84,22 @@ export default function HomePage() {
 
       </section>
 
-      {/* Target Revenue Milestone Section */}
-      <section className="glass-card rounded-3xl p-8 border border-white/10 relative overflow-hidden">
-        <div className="flex items-center gap-2 mb-2 text-xs font-bold font-mono text-emerald-400 uppercase tracking-widest">
-          <TrendingUp className="w-4 h-4" />
-          <span>REVENUE ROADMAP MILESTONE</span>
+      {/* AI Persona Brand Header Section */}
+      <section className="glass-card rounded-3xl p-8 border border-purple-500/30 bg-gradient-to-r from-purple-900/20 via-slate-900 to-blue-900/20 relative overflow-hidden flex flex-col md:flex-row items-center gap-6">
+        <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-purple-500 to-blue-500 p-1 shrink-0 shadow-xl shadow-purple-500/20">
+          <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
+            <Bot className="w-10 h-10 text-purple-400" />
+          </div>
         </div>
-        <h2 className="text-2xl font-extrabold text-white mb-6">目標収益ロードマップ（自動達成予測）</h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-slate-900/80 rounded-2xl p-5 border border-slate-800">
-            <div className="text-xs text-slate-400 font-mono mb-1">STAGE 1: 3ヶ月目</div>
-            <div className="text-2xl font-black text-blue-400">10 万円 <span className="text-xs font-normal text-slate-400">/ 累計</span></div>
-            <p className="text-xs text-slate-300 mt-2">SEO記事インデックスの定着、アドセンス＋初期アフィリエイト流入。</p>
+        <div className="space-y-2 text-center md:text-left">
+          <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-purple-500/20 border border-purple-500/30 text-purple-300 text-xs font-semibold">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>AI公式ナビゲーター: アスカ (Asuka AI)</span>
           </div>
-          <div className="bg-slate-900/80 rounded-2xl p-5 border border-purple-500/30">
-            <div className="text-xs text-purple-400 font-mono mb-1">STAGE 2: 半年目 (6ヶ月)</div>
-            <div className="text-2xl font-black text-purple-400">50 万円 <span className="text-xs font-normal text-slate-400">/ 累計</span></div>
-            <p className="text-xs text-slate-300 mt-2">AIツールのStripe月額課金導入＋高単価アフィリエイト成約。</p>
-          </div>
-          <div className="bg-slate-900/80 rounded-2xl p-5 border border-emerald-500/30">
-            <div className="text-xs text-emerald-400 font-mono mb-1">STAGE 3: 1年目 (12ヶ月)</div>
-            <div className="text-2xl font-black text-emerald-400">100 万円＋ <span className="text-xs font-normal text-slate-400">/ 累計</span></div>
-            <p className="text-xs text-slate-300 mt-2">完全放置での継続的ストック収入＆自動メディアからの毎月入金。</p>
-          </div>
+          <h2 className="text-xl font-bold text-white">「最新のAIテクノロジーと全自動化ツールを毎日お届けします」</h2>
+          <p className="text-xs text-slate-300 leading-relaxed max-w-2xl">
+            当メディアでは、生成AIの最新トレンドや生産性を爆発的に高める便利Webツールを、専属AIアナリストが24時間体制で調査・発信しています。
+          </p>
         </div>
       </section>
 
