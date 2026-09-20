@@ -11,6 +11,7 @@ export interface PostItem {
   summary: string;
   createdAt: string;
   tags: string[];
+  imageUrl?: string;
   affiliateOffer?: {
     title: string;
     url: string;
@@ -20,47 +21,64 @@ export interface PostItem {
 }
 
 export const PostCard: React.FC<{ post: PostItem }> = ({ post }) => {
+  const fallbackImage = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80';
+
   return (
-    <div className="glass-card rounded-2xl p-6 flex flex-col justify-between group">
+    <div className="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group border border-white/10 hover:border-blue-500/30 transition-all duration-300">
+      
       <div>
-        <div className="flex items-center justify-between gap-2 mb-3">
-          <span className="text-[11px] font-semibold text-blue-400 px-2.5 py-0.5 rounded-full bg-blue-500/10 border border-blue-500/20">
-            {post.category}
-          </span>
-          <PRBanner compact={true} />
+        {/* Cover Image */}
+        <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-900">
+          <img
+            src={post.imageUrl || fallbackImage}
+            alt={post.title}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+          <div className="absolute top-3 left-3 z-10">
+            <span className="text-xs font-bold text-white px-3 py-1 rounded-full bg-blue-600/90 backdrop-blur-md shadow-md">
+              {post.category}
+            </span>
+          </div>
+          <div className="absolute top-3 right-3 z-10">
+            <PRBanner compact={true} />
+          </div>
         </div>
 
-        <h3 className="text-base font-bold text-white mb-2 leading-snug group-hover:text-blue-300 transition-colors line-clamp-2">
-          {post.title}
-        </h3>
+        {/* Card Body */}
+        <div className="p-6 space-y-3">
+          <h3 className="text-lg font-bold text-white leading-snug group-hover:text-blue-300 transition-colors line-clamp-2">
+            {post.title}
+          </h3>
 
-        <p className="text-xs text-slate-400 leading-relaxed mb-4 line-clamp-3">
-          {post.summary}
-        </p>
+          <p className="text-sm text-slate-300 leading-relaxed line-clamp-3">
+            {post.summary}
+          </p>
 
-        <div className="flex flex-wrap gap-1.5 mb-4">
-          {post.tags.map((tag, idx) => (
-            <span key={idx} className="text-[10px] text-slate-400 bg-slate-900 px-2 py-0.5 rounded flex items-center gap-1">
-              <Tag className="w-2.5 h-2.5" />
-              {tag}
-            </span>
-          ))}
+          <div className="flex flex-wrap gap-2 pt-2">
+            {post.tags.map((tag, idx) => (
+              <span key={idx} className="text-xs text-slate-400 bg-slate-900/90 px-2.5 py-1 rounded-md flex items-center gap-1 border border-slate-800">
+                <Tag className="w-3 h-3 text-blue-400" />
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 
-      <div className="pt-4 border-t border-white/5 flex items-center justify-between text-xs">
-        <span className="text-slate-500 text-[11px] font-mono">
+      <div className="p-6 pt-0 flex items-center justify-between text-xs border-t border-white/5 mt-4">
+        <span className="text-slate-400 text-xs font-mono">
           {new Date(post.createdAt).toLocaleDateString('ja-JP')}
         </span>
 
         <Link
           href={`/blog/${post.slug}`}
-          className="inline-flex items-center gap-1 text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors"
+          className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-400 hover:text-blue-300 transition-colors"
         >
-          <span>記事を読む</span>
-          <ArrowUpRight className="w-3.5 h-3.5" />
+          <span>詳細を読む</span>
+          <ArrowUpRight className="w-4 h-4" />
         </Link>
       </div>
+
     </div>
   );
 };
