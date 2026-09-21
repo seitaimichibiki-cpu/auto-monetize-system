@@ -6,12 +6,17 @@ on:
     - cron: '0 0 * * *'
   workflow_dispatch: # 手動でのテストトリガーも可能
 
+permissions:
+  contents: write
+
 jobs:
   auto-monetize:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -33,5 +38,4 @@ jobs:
           git config --global user.email 'bot@auto-monetize.local'
           git add src/data/
           git status
-          git diff-index --quiet HEAD || git commit -m "auto: publish daily AI monetized content and update analytics"
-          git push
+          git diff-index --quiet HEAD || (git commit -m "auto: publish daily AI monetized content and update analytics" && git push origin main)
