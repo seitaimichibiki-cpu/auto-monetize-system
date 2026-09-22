@@ -4,12 +4,12 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'AutoMonetize AI - 完全自律型マイクロSaaS＆情報プラットフォーム',
-  description: '人的リソース0・法的リスク0・初期経費0で完全自動化された収益化システム。無料AIマイクロツールと最新AI自動生成メディアを公開中。',
-  keywords: ['AI自動化', '完全自動マネタイズ', 'マイクロSaaS', '副業', '景表法遵守', 'Gemini API'],
+  title: 'AIハック | AI副業・ツール活用・フリーランスの実践ノウハウ',
+  description: 'AIを使って副業で稼ぐ方法、最新AIツールの活用術、フリーランス独立ガイド、Webマーケティングのノウハウを発信。実践的で再現性の高い情報だけを厳選。',
+  keywords: ['AI副業', 'AIツール', 'フリーランス', 'Webマーケティング', 'ChatGPT', 'Gemini', '副業 稼ぎ方'],
   openGraph: {
-    title: 'AutoMonetize AI - 完全自律型マネタイズプラットフォーム',
-    description: '人的0・リスク0・経費0の完全無人収益化システム',
+    title: 'AIハック | AI×副業の実践メディア',
+    description: 'AIを活用した副業・フリーランス・Webマーケティングの実践ノウハウを発信',
     type: 'website',
   },
 };

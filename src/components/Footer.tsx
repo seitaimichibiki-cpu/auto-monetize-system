@@ -9,9 +9,9 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           
           <div className="md:col-span-2 space-y-3">
-            <span className="text-base font-bold text-white">AI Tech Insights</span>
+            <span className="text-base font-bold text-white">AIハック</span>
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
-              ビジネスと開発の生産性を最大化する最新AIテクノロジー、活用ノウハウ、実用Webツールを提供する専門メディアプラットフォームです。
+              AI副業・ツール活用・フリーランス独立・Webマーケティングの実践ノウハウを発信する専門メディアです。
             </p>
             <div className="flex items-center gap-1.5 text-[11px] text-slate-500 font-mono">
               <ShieldCheck className="w-3.5 h-3.5 text-blue-400" />
@@ -39,7 +39,7 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="border-t border-slate-900 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
-          <p>© 2026 AI Tech Insights. All rights reserved.</p>
+          <p>© 2026 AIハック. All rights reserved.</p>
           <p className="text-[11px] text-slate-600">※ 当メディアのコンテンツには一部PR広告が含まれる場合があります。</p>
         </div>
       </div>

@@ -27,7 +27,7 @@ export default function BlogListPage({
           <span>24/7 AI AUTONOMOUS MEDIA</span>
         </div>
         <h1 className="text-3xl font-extrabold text-white">
-          {selectedCategory ? selectedCategory : 'AI全自動生成コンテンツメディア'}
+          {selectedCategory ? selectedCategory : 'AIハック - 記事一覧'}
         </h1>
         <p className="text-xs text-slate-400 mt-2">
           {selectedCategory

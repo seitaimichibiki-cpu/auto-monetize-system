@@ -15,8 +15,8 @@ export const Navbar: React.FC = () => {
             </div>
           </div>
           <div>
-            <span className="text-lg font-bold tracking-tight text-white">AI Tech Insights</span>
-            <span className="block text-[10px] text-slate-400 font-mono tracking-wider">AI & Business Automation</span>
+            <span className="text-lg font-bold tracking-tight text-white">AIハック</span>
+            <span className="block text-[10px] text-slate-400 font-mono tracking-wider">AI×副業の実践メディア</span>
           </div>
         </Link>
 
