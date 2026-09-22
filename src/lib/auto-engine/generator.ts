@@ -20,19 +20,42 @@ export interface GeneratedPostContent {
   createdAt: string;
   imageUrl: string;
   legalVerified: boolean;
+  type?: 'pillar' | 'cluster';
+  parentSlug?: string;
+  relatedSlugs?: string[];
 }
 
 export async function generateContentForTopic(topic: TrendTopic): Promise<GeneratedPostContent> {
   console.log(`[AutoEngine:ManablogGenerator] マナブログ流アフィリエイトライティングエンジン起動: 「${topic.keyword}」...`);
 
   const timestamp = new Date().toISOString();
-  const slugId = `auto-post-${Date.now()}`;
+  const slugId = topic.slug || `auto-post-${Date.now()}`;
   
-  // マナブログ流 タイトル構文: 【完全解説】〇〇の始め方・やり方【初心者向け】
-  const title = `【完全解説】${topic.keyword}の始め方・やり方【初心者向け】`;
+  // マナブログ流 タイトル構文: topic.suggestedAngleをそのまま使う
+  const title = topic.suggestedAngle;
   
-  const mainImage = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80';
-  const subImage = 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80';
+  const THEME_IMAGES: Record<string, string[]> = {
+    'AI副業・自動化': [
+      'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1200&q=80',
+    ],
+    'AIガジェット': [
+      'https://images.unsplash.com/photo-1589492477829-5e65395b66cc?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?auto=format&fit=crop&w=1200&q=80',
+    ],
+    'セキュリティ': [
+      'https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=1200&q=80',
+    ],
+  };
+
+  const images = THEME_IMAGES[topic.category] || [
+    'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80'
+  ];
+  
+  const mainImage = images[0];
+  const subImage = images.length > 1 ? images[1] : images[0];
 
   const content = `本記事では、「${topic.keyword}について詳しく知りたい」「何から始めればいいか分からない」という悩みにお答えします。
 
@@ -126,6 +149,9 @@ export async function generateContentForTopic(topic: TrendTopic): Promise<Genera
     tags: [topic.category, '完全解説', '初心者向け', '始め方'],
     createdAt: timestamp,
     imageUrl: mainImage,
-    legalVerified: true
+    legalVerified: true,
+    type: topic.type,
+    parentSlug: topic.parentSlug,
+    relatedSlugs: topic.relatedSlugs
   };
 }

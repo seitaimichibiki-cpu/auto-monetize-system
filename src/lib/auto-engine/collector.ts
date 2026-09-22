@@ -8,38 +8,61 @@ export interface TrendTopic {
   category: string;
   searchVolume: 'HIGH' | 'MEDIUM' | 'EMERGING';
   suggestedAngle: string;
+  type: 'pillar' | 'cluster';
+  parentSlug?: string;
+  relatedSlugs: string[];
+  slug?: string;
 }
 
 const TREND_SEED_DATABASE: TrendTopic[] = [
   {
-    keyword: 'AI自動化 副業 2026',
+    keyword: 'AI副業 始め方 2026',
     category: 'AI副業・自動化',
     searchVolume: 'HIGH',
-    suggestedAngle: '初期費用0円で始めるAI自動マネタイズシステムの構築ガイド'
+    suggestedAngle: '初期費用0円で始めるAI自動マネタイズシステムの構築ガイド',
+    type: 'pillar',
+    slug: 'ai-side-job-roadmap-2026',
+    relatedSlugs: ['ai-writing-earn-money', 'plaud-note-review', 'programming-beginner-ai-side-job', 'vpn-remote-work-security']
   },
   {
-    keyword: 'Gemini 3.6 API 使い方 自動化',
-    category: 'AIテクノロジー',
+    keyword: 'AI文章生成 副業 稼ぎ方',
+    category: 'AI副業・自動化',
     searchVolume: 'HIGH',
-    suggestedAngle: 'Gemini APIを活用した完全無人ポータルサイト制作テクニック'
+    suggestedAngle: 'AI文章生成 副業 稼ぎ方', // 指示がないためシードから類推、ただしタイトルはsuggestedAngleベースになる
+    type: 'cluster',
+    parentSlug: 'ai-side-job-roadmap-2026',
+    slug: 'ai-writing-earn-money',
+    relatedSlugs: ['plaud-note-review', 'programming-beginner-ai-side-job', 'vpn-remote-work-security']
   },
   {
-    keyword: 'マイクロSaaS 個人開発 収益化',
-    category: 'SaaS・Webツール',
-    searchVolume: 'MEDIUM',
-    suggestedAngle: '人的リソースゼロで月10万円〜50万円を狙うマイクロSaaS構築戦略'
-  },
-  {
-    keyword: '景表法 ステマ規制 対策 自動化',
-    category: 'コンプライアンス',
-    searchVolume: 'EMERGING',
-    suggestedAngle: '法的リスク0を担保するWebサイト用自動PR表記・リーガルシステム'
-  },
-  {
-    keyword: 'NoCode AIワークフロー 自動投稿',
-    category: '生産性・ツール',
+    keyword: 'PLAUD NOTE レビュー AIボイスレコーダー',
+    category: 'AIガジェット',
     searchVolume: 'HIGH',
-    suggestedAngle: 'GitHub ActionsとMakeで行う24時間365日無人投稿パイプライン'
+    suggestedAngle: 'PLAUD NOTE レビュー AIボイスレコーダー',
+    type: 'cluster',
+    parentSlug: 'ai-side-job-roadmap-2026',
+    slug: 'plaud-note-review',
+    relatedSlugs: ['ai-writing-earn-money', 'programming-beginner-ai-side-job', 'vpn-remote-work-security']
+  },
+  {
+    keyword: 'プログラミング未経験 AI副業',
+    category: 'AI副業・自動化',
+    searchVolume: 'HIGH',
+    suggestedAngle: 'プログラミング未経験 AI副業',
+    type: 'cluster',
+    parentSlug: 'ai-side-job-roadmap-2026',
+    slug: 'programming-beginner-ai-side-job',
+    relatedSlugs: ['ai-writing-earn-money', 'plaud-note-review', 'vpn-remote-work-security']
+  },
+  {
+    keyword: 'VPN リモートワーク セキュリティ',
+    category: 'セキュリティ',
+    searchVolume: 'HIGH',
+    suggestedAngle: 'VPN リモートワーク セキュリティ',
+    type: 'cluster',
+    parentSlug: 'ai-side-job-roadmap-2026',
+    slug: 'vpn-remote-work-security',
+    relatedSlugs: ['ai-writing-earn-money', 'plaud-note-review', 'programming-beginner-ai-side-job']
   }
 ];
 

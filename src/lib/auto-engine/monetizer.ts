@@ -76,11 +76,27 @@ const AFFILIATE_OFFER_POOL = [
   }
 ];
 
+const CATEGORY_OFFER_MAP: Record<string, number[]> = {
+  'AI副業・自動化': [0, 5],
+  'AIガジェット': [1, 2],
+  'AIテクノロジー': [2, 1],
+  'プログラミング': [4, 5],
+  'セキュリティ': [3, 0],
+  'SaaS・Webツール': [0, 6],
+  'コンプライアンス': [6, 0],
+  '生産性・ツール': [5, 1],
+};
+
 export async function attachMonetizationOffers(post: GeneratedPostContent): Promise<FinalMonetizedPost> {
   console.log(`[AutoEngine:Monetizer] "${post.title}" に3刀流ハイブリッドオファーを結合中...`);
 
-  const offerIndex = Math.floor(Math.random() * AFFILIATE_OFFER_POOL.length);
-  const selectedOffer = AFFILIATE_OFFER_POOL[offerIndex];
+  let selectedOffer = AFFILIATE_OFFER_POOL[Math.floor(Math.random() * AFFILIATE_OFFER_POOL.length)];
+  if (post.category && CATEGORY_OFFER_MAP[post.category]) {
+    const offerIndices = CATEGORY_OFFER_MAP[post.category];
+    if (offerIndices.length > 0) {
+      selectedOffer = AFFILIATE_OFFER_POOL[offerIndices[0]];
+    }
+  }
 
   const prDisclaimer = '※ 本ページにはアフィリエイト広告およびプロモーションが含まれています。';
 
