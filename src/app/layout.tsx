@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: 'AIハック | AI副業・ツール活用・フリーランスの実践ノウハウ',
   description: 'AIを使って副業で稼ぐ方法、最新AIツールの活用術、フリーランス独立ガイド、Webマーケティングのノウハウを発信。実践的で再現性の高い情報だけを厳選。',
   keywords: ['AI副業', 'AIツール', 'フリーランス', 'Webマーケティング', 'ChatGPT', 'Gemini', '副業 稼ぎ方'],
+  verification: {
+    google: 'x89LtN9kuODV5znXVQhbHRcqfyfYNnmk7AUeQti55d0',
+  },
   openGraph: {
     title: 'AIハック | AI×副業の実践メディア',
     description: 'AIを活用した副業・フリーランス・Webマーケティングの実践ノウハウを発信',
