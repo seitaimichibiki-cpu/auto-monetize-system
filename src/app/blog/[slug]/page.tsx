@@ -1,10 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
-import { ArrowLeft, ExternalLink, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Sparkles } from 'lucide-react';
 import { PRBanner } from '@/components/PRBanner';
 import postsData from '@/data/posts.json';
 
-// Helper function to render Manablog-style content and markdown elements
 function renderManablogContent(content: string) {
   const blocks = content.split('\n\n');
 
@@ -122,7 +121,7 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
             {post.summary}
           </p>
 
-          {/* マナブログ流 冒頭CTA (信頼性枠直後の自然なテキストリンク) */}
+          {/* 冒頭 1. テキストリンク導線 */}
           {post.affiliateOffer && (
             <div className="pt-3 pb-1 border-t border-slate-800/80">
               <a
@@ -140,16 +139,17 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
 
       </div>
 
-      {/* Article Body Content (Manablog Layout) */}
+      {/* Article Body Content */}
       <article className="glass-card rounded-3xl p-8 sm:p-10 border border-white/10">
         <div className="prose prose-invert max-w-none">
           {renderManablogContent(post.content)}
         </div>
       </article>
 
-      {/* マナブログ流 中盤・末尾 CTA オファーボックス (押しつけがましくない洗練されたデザイン) */}
+      {/* 3刀流ハイブリッド CTA BOX (2. 公式画像バナー + 3. 大型ボタン付きカード) */}
       {post.affiliateOffer && (
-        <div className="glass-card rounded-3xl p-8 border border-blue-500/40 bg-gradient-to-br from-blue-950/40 via-slate-900 to-purple-950/40 space-y-5 shadow-2xl">
+        <div className="glass-card rounded-3xl p-8 border border-blue-500/40 bg-gradient-to-br from-blue-950/40 via-slate-900 to-purple-950/40 space-y-6 shadow-2xl">
+          
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-blue-400 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/30">
               PR 公式おすすめソリューション
@@ -157,22 +157,42 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
             <span className="text-xs text-slate-400">{post.affiliateOffer.sponsor}</span>
           </div>
 
-          <div>
-            <h3 className="text-xl font-bold text-white mb-2">
-              {post.affiliateOffer.title}
-            </h3>
-            <p className="text-sm text-slate-300 font-mono">{post.affiliateOffer.priceInfo}</p>
+          <div className="flex flex-col md:flex-row items-center gap-6">
+            {/* 2. 公式画像バナー枠 */}
+            {post.affiliateOffer.bannerImgUrl && (
+              <div className="shrink-0 rounded-2xl overflow-hidden border border-white/10 p-2 bg-slate-950 flex items-center justify-center">
+                <a href={post.affiliateOffer.url} target="_blank" rel="noopener noreferrer">
+                  <img
+                    src={post.affiliateOffer.bannerImgUrl}
+                    alt={post.affiliateOffer.title}
+                    className="hover:scale-105 transition-transform duration-300 rounded-xl"
+                  />
+                  {post.affiliateOffer.trackingImgUrl && (
+                    <img src={post.affiliateOffer.trackingImgUrl} border="0" width="1" height="1" alt="" />
+                  )}
+                </a>
+              </div>
+            )}
+
+            {/* 3. 詳細説明 & 大型ボタン */}
+            <div className="space-y-3 flex-1 text-center md:text-left">
+              <h3 className="text-xl font-bold text-white">
+                {post.affiliateOffer.title}
+              </h3>
+              <p className="text-sm text-slate-300 font-mono">{post.affiliateOffer.priceInfo}</p>
+              
+              <a
+                href={post.affiliateOffer.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-4 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white font-extrabold text-base shadow-xl shadow-blue-500/30 flex items-center justify-center gap-2 hover:brightness-110 transition-all hover:scale-[1.01]"
+              >
+                <span>公式ページで限定特典・詳細を確認する</span>
+                <ExternalLink className="w-5 h-5" />
+              </a>
+            </div>
           </div>
 
-          <a
-            href={post.affiliateOffer.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full py-4 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white font-extrabold text-base shadow-xl shadow-blue-500/30 flex items-center justify-center gap-2 hover:brightness-110 transition-all hover:scale-[1.01]"
-          >
-            <span>公式ページで限定特典・詳細を確認する</span>
-            <ExternalLink className="w-5 h-5" />
-          </a>
         </div>
       )}
 
