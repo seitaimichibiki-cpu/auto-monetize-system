@@ -2,7 +2,65 @@ import React from 'react';
 import Link from 'next/link';
 import { ArrowLeft, ExternalLink, Sparkles, Clock, FileText, List, ChevronRight } from 'lucide-react';
 import { PRBanner } from '@/components/PRBanner';
+import { Sidebar } from '@/components/Sidebar';
 import postsData from '@/data/posts.json';
+import type { Metadata } from 'next';
+
+const BASE_URL = 'https://auto-monetize-system.vercel.app';
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const post = postsData.find((p) => p.slug === params.slug);
+  if (!post) return { title: '記事が見つかりません | AIハック' };
+
+  return {
+    title: `${post.title} | AIハック`,
+    description: post.summary || post.content.replace(/\s+/g, ' ').slice(0, 160),
+    openGraph: {
+      title: post.title,
+      description: post.summary || post.content.replace(/\s+/g, ' ').slice(0, 160),
+      type: 'article',
+      url: `${BASE_URL}/blog/${post.slug}`,
+      images: post.imageUrl ? [{ url: post.imageUrl, width: 1200, height: 630 }] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.summary || post.content.replace(/\s+/g, ' ').slice(0, 160),
+    },
+    alternates: {
+      canonical: `${BASE_URL}/blog/${post.slug}`,
+    },
+  };
+}
+
+function ArticleJsonLd({ post }: { post: any }) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.summary || '',
+    image: post.imageUrl || '',
+    datePublished: post.createdAt,
+    dateModified: post.createdAt,
+    author: { '@type': 'Organization', name: 'AIハック' },
+    publisher: {
+      '@type': 'Organization',
+      name: 'AIハック',
+      url: BASE_URL,
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${BASE_URL}/blog/${post.slug}`,
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+}
 
 function parseInline(text: string) {
   let parsed = text;
@@ -119,8 +177,12 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
   const readTime = Math.ceil(wordCount / 500) || 1;
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 pb-16 px-4 sm:px-0">
-      
+    <>
+      <ArticleJsonLd post={post} />
+      <div className="flex gap-8 pb-16 px-4 sm:px-0">
+        {/* メインコンテンツ */}
+        <div className="flex-1 min-w-0 max-w-4xl space-y-8">
+
       <Link href="/blog" className="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors">
         <ArrowLeft className="w-4 h-4" />
         <span>記事一覧に戻る</span>
@@ -291,7 +353,16 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
         </div>
       )}
 
-    </div>
+        </div>
+
+        {/* サイドバー */}
+        <div className="hidden lg:block w-72 shrink-0">
+          <div className="sticky top-24">
+            <Sidebar />
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 

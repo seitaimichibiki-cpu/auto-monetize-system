@@ -30,8 +30,8 @@ export const Footer: React.FC = () => {
           <div>
             <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider mb-3">リーガル情報</h4>
             <ul className="space-y-2 text-xs text-slate-500">
-              <li>特定商取引法に基づく表記</li>
-              <li>プライバシーポリシー</li>
+              <li><Link href="/legal" className="hover:text-white transition-colors">特定商取引法に基づく表記</Link></li>
+              <li><Link href="/privacy" className="hover:text-white transition-colors">プライバシーポリシー</Link></li>
               <li>利用規約 / 免責事項</li>
             </ul>
           </div>
