@@ -25,3 +25,5 @@ yarn-error.log*
 # OS metadata
 .DS_Store
 *.pem
+.vercel
+.env*
