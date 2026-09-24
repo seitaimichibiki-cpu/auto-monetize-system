@@ -39,11 +39,10 @@ export default function RootLayout({
             gtag('config', 'G-FH979JLSXE');
           `}
         </Script>
-        <Script
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4110182836435824"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
         />
       </head>
       <body className="antialiased selection:bg-blue-500/30 selection:text-blue-200">
