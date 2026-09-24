@@ -20,8 +20,14 @@ export async function publishPost(post: FinalMonetizedPost): Promise<void> {
     currentPosts = JSON.parse(rawData);
   }
 
-  // 先頭に追加（最新記事が一番上に来るように）
-  currentPosts.unshift(post);
+  // 重複スラグチェック: 既存記事があれば上書き、なければ先頭に追加
+  const existingIndex = currentPosts.findIndex((p: any) => p.slug === post.slug);
+  if (existingIndex !== -1) {
+    console.log(`[AutoEngine:Publisher] 既存記事 "${post.slug}" を検出、上書き更新します。`);
+    currentPosts[existingIndex] = post;
+  } else {
+    currentPosts.unshift(post);
+  }
 
   fs.writeFileSync(POSTS_FILE_PATH, JSON.stringify(currentPosts, null, 2), 'utf-8');
 

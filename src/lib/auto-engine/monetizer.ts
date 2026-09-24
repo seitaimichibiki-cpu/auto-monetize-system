@@ -73,11 +73,29 @@ const AFFILIATE_OFFER_POOL = [
     priceInfo: 'ドメイン取得・ブランディング最適化',
     bannerImgUrl: 'https://www28.a8.net/svt/bgt?aid=260920645424&wid=001&eno=01&mid=s00000000018015065000&mc=1',
     trackingImgUrl: 'https://www12.a8.net/0.gif?a8mat=4BCFNP+70FT9U+50+2HOYA9'
+  },
+  {
+    title: '【国内最速】ConoHa WING - 高性能レンタルサーバー',
+    url: 'https://px.a8.net/svt/ejp?a8mat=4BCFNP+7LVF1U+50+35UAKX',
+    sponsor: 'GMOインターネットグループ（ConoHa）',
+    priceInfo: '月額678円〜・初期費用無料'
+  },
+  {
+    title: '【未経験からプロへ】TechAcademy - オンラインプログラミングスクール',
+    url: 'https://px.a8.net/svt/ejp?a8mat=4BCFNP+B8US4Y+2PEO+1HSASH',
+    sponsor: 'キラメックス株式会社',
+    priceInfo: '最短4週間・現役エンジニアのメンター制度'
+  },
+  {
+    title: '【クラウド会計シェアNo.1】freee - 確定申告・経理自動化',
+    url: 'https://px.a8.net/svt/ejp?a8mat=4BCFNP+B8US4Y+2PEO+1HSASH',
+    sponsor: 'freee株式会社',
+    priceInfo: '確定申告・経理をAIで自動化'
   }
 ];
 
 const CATEGORY_OFFER_MAP: Record<string, number[]> = {
-  'AI副業・自動化': [0, 5],
+  'AI副業・自動化': [8, 0, 5],
   'AIガジェット': [1, 2],
   'AIテクノロジー': [2, 1],
   'プログラミング': [4, 5],
@@ -85,6 +103,8 @@ const CATEGORY_OFFER_MAP: Record<string, number[]> = {
   'SaaS・Webツール': [0, 6],
   'コンプライアンス': [6, 0],
   '生産性・ツール': [5, 1],
+  'Webマーケティング': [7],
+  'フリーランス': [9],
 };
 
 export async function attachMonetizationOffers(post: GeneratedPostContent): Promise<FinalMonetizedPost> {

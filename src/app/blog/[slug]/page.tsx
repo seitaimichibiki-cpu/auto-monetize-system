@@ -3,14 +3,22 @@ import Link from 'next/link';
 import { ArrowLeft, ExternalLink, Sparkles, Clock, FileText, List, ChevronRight } from 'lucide-react';
 import { PRBanner } from '@/components/PRBanner';
 import { Sidebar } from '@/components/Sidebar';
+import { NewsletterCTA } from '@/components/NewsletterCTA';
+import { ShareButtons } from '@/components/ShareButtons';
+import { Breadcrumb } from '@/components/Breadcrumb';
+import { ArticleNavigation } from '@/components/ArticleNavigation';
 import postsData from '@/data/posts.json';
 import type { Metadata } from 'next';
+import Image from 'next/image';
 
 const BASE_URL = 'https://auto-monetize-system.vercel.app';
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const post = postsData.find((p) => p.slug === params.slug);
   if (!post) return { title: '記事が見つかりません | AIハック' };
+  
+  const fallbackImage = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80';
+  const ogImageUrl = post.imageUrl || fallbackImage;
 
   return {
     title: `${post.title} | AIハック`,
@@ -20,12 +28,20 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       description: post.summary || post.content.replace(/\s+/g, ' ').slice(0, 160),
       type: 'article',
       url: `${BASE_URL}/blog/${post.slug}`,
-      images: post.imageUrl ? [{ url: post.imageUrl, width: 1200, height: 630 }] : [],
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        }
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.summary || post.content.replace(/\s+/g, ' ').slice(0, 160),
+      images: [ogImageUrl],
     },
     alternates: {
       canonical: `${BASE_URL}/blog/${post.slug}`,
@@ -79,44 +95,49 @@ function parseInline(text: string) {
 }
 
 function renderManablogContent(content: string) {
-  const blocks = content.split('\n\n');
+  const lines = content.split('\n');
+  const elements: React.ReactNode[] = [];
+  
+  let currentList: string[] = [];
+  let currentParagraph: string[] = [];
+  let currentTable: string[] = [];
+  let keyIdx = 0;
+  let h2Count = 0;
 
-  return blocks.map((block, idx) => {
-    // HTML含有ブロック (a tag or img tag starting lines)
-    if (block.trim().startsWith('<a ') || block.trim().startsWith('<img ')) {
-      return <div key={idx} dangerouslySetInnerHTML={{ __html: block }} className="my-6 flex justify-center" />;
+  const flushList = () => {
+    if (currentList.length > 0) {
+      elements.push(
+        <ul key={keyIdx++} className="list-disc list-inside space-y-2 my-5 text-slate-200 text-base leading-relaxed bg-slate-900/50 p-4 sm:p-6 rounded-xl border border-slate-800/80">
+          {currentList.map((item, iIdx) => (
+            <li key={`li-${keyIdx}-${iIdx}`} dangerouslySetInnerHTML={{ __html: parseInline(item.replace(/^[-*]|\d+\.\s*/, '').trim()) }} />
+          ))}
+        </ul>
+      );
+      currentList = [];
     }
+  };
 
-    // Headers
-    if (block.startsWith('## ')) {
-      const title = block.replace('## ', '');
-      return <h2 key={idx} id={`heading-${idx}`} className="text-xl sm:text-2xl font-bold text-white border-l-4 border-blue-500 pl-3 my-8 pt-2 scroll-mt-24">{parseInline(title)}</h2>;
+  const flushParagraph = () => {
+    if (currentParagraph.length > 0) {
+      elements.push(
+        <p key={keyIdx++} className="text-slate-200 text-base leading-loose my-5" dangerouslySetInnerHTML={{ __html: parseInline(currentParagraph.join('<br />')) }} />
+      );
+      currentParagraph = [];
     }
-    if (block.startsWith('### ')) {
-      return <h3 key={idx} className="text-lg font-bold text-blue-300 my-5">{parseInline(block.replace('### ', ''))}</h3>;
-    }
+  };
 
-    // Images (Markdown format)
-    if (block.startsWith('![')) {
-      const match = block.match(/!\[(.*?)\]\((.*?)\)/);
-      if (match) {
-        return <img key={idx} src={match[2]} alt={match[1]} className="w-full rounded-2xl shadow-xl my-6" />;
-      }
-    }
-
-    // Comparison Table
-    const tableLines = block.split('\n').filter((l) => l.trim().startsWith('|'));
-    if (tableLines.length >= 2 && (block.includes('---') || tableLines.length === block.split('\n').filter(l => l.trim() !== '').length)) {
-      const headerCols = tableLines[0].split('|').map((c) => c.trim()).filter(Boolean);
-      const rowLines = tableLines.slice(1).filter((l) => !l.includes('---')); // ---を含む行は除外
-
-      return (
-        <div key={idx} className="my-8 overflow-x-auto rounded-2xl border border-slate-800 bg-slate-900/90 shadow-xl">
+  const flushTable = () => {
+    if (currentTable.length > 0) {
+      const headerCols = currentTable[0].split('|').map(c => c.trim()).filter(Boolean);
+      const rowLines = currentTable.slice(1).filter(l => !l.includes('---'));
+      
+      elements.push(
+        <div key={keyIdx++} className="my-8 overflow-x-auto rounded-2xl border border-slate-800 bg-slate-900/90 shadow-xl">
           <table className="w-full text-left border-collapse text-base min-w-[600px]">
             <thead>
               <tr className="bg-slate-800 text-blue-300 font-bold border-b border-slate-700">
                 {headerCols.map((col, cIdx) => (
-                  <th key={cIdx} className="p-4 border-r border-slate-700/50 last:border-0" dangerouslySetInnerHTML={{ __html: parseInline(col) }} />
+                  <th key={`th-${keyIdx}-${cIdx}`} className="p-4 border-r border-slate-700/50 last:border-0" dangerouslySetInnerHTML={{ __html: parseInline(col) }} />
                 ))}
               </tr>
             </thead>
@@ -124,9 +145,9 @@ function renderManablogContent(content: string) {
               {rowLines.map((rLine, rIdx) => {
                 const cols = rLine.split('|').map((c) => c.trim()).filter(Boolean);
                 return (
-                  <tr key={rIdx} className="border-b border-slate-800/80 hover:bg-slate-800/40 transition-colors">
+                  <tr key={`tr-${keyIdx}-${rIdx}`} className="border-b border-slate-800/80 hover:bg-slate-800/40 transition-colors">
                     {cols.map((col, cIdx) => (
-                      <td key={cIdx} className="p-4 text-slate-200 border-r border-slate-800/50 last:border-0" dangerouslySetInnerHTML={{ __html: parseInline(col) }} />
+                      <td key={`td-${keyIdx}-${rIdx}-${cIdx}`} className="p-4 text-slate-200 border-r border-slate-800/50 last:border-0" dangerouslySetInnerHTML={{ __html: parseInline(col) }} />
                     ))}
                   </tr>
                 );
@@ -135,23 +156,91 @@ function renderManablogContent(content: string) {
           </table>
         </div>
       );
+      currentTable = [];
+    }
+  };
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const trimmed = line.trim();
+
+    if (trimmed === '') {
+      flushList();
+      flushParagraph();
+      flushTable();
+      continue;
     }
 
-    // Lists
-    if (block.startsWith('- ') || block.startsWith('1. ')) {
-      const items = block.split('\n');
-      return (
-        <ul key={idx} className="list-disc list-inside space-y-2 my-5 text-slate-200 text-base leading-relaxed bg-slate-900/50 p-4 sm:p-6 rounded-xl border border-slate-800/80">
-          {items.map((item, iIdx) => (
-            <li key={iIdx} dangerouslySetInnerHTML={{ __html: parseInline(item.replace(/^[-*]|\d+\.\s*/, '').trim()) }} />
-          ))}
-        </ul>
-      );
+    if (trimmed.startsWith('|')) {
+      flushList();
+      flushParagraph();
+      currentTable.push(line);
+      continue;
+    } else {
+      flushTable();
+    }
+
+    if (trimmed.startsWith('<a ') || trimmed.startsWith('<img ')) {
+      flushList();
+      flushParagraph();
+      elements.push(<div key={keyIdx++} dangerouslySetInnerHTML={{ __html: line }} className="my-6 flex justify-center" />);
+      continue;
+    }
+
+    if (line.startsWith('## ')) {
+      flushList();
+      flushParagraph();
+      const title = line.replace('## ', '');
+      elements.push(<h2 key={keyIdx++} id={`heading-${h2Count++}`} className="text-xl sm:text-2xl font-bold text-white border-l-4 border-blue-500 pl-3 my-8 pt-2 scroll-mt-24" dangerouslySetInnerHTML={{ __html: parseInline(title) }} />);
+      continue;
+    }
+    
+    if (line.startsWith('### ')) {
+      flushList();
+      flushParagraph();
+      elements.push(<h3 key={keyIdx++} className="text-lg font-bold text-blue-300 my-5" dangerouslySetInnerHTML={{ __html: parseInline(line.replace('### ', '')) }} />);
+      continue;
+    }
+
+    if (line.startsWith('![')) {
+      flushList();
+      flushParagraph();
+      const match = line.match(/!\[(.*?)\]\((.*?)\)/);
+      if (match) {
+        const alt = match[1];
+        const url = match[2];
+        if (url.includes('a8.net')) {
+          elements.push(<img key={keyIdx++} src={url} alt={alt} className="w-full rounded-2xl shadow-xl my-6" />);
+        } else {
+          elements.push(<Image key={keyIdx++} src={url} alt={alt} width={1200} height={630} sizes="100vw" className="w-full h-auto rounded-2xl shadow-xl my-6" />);
+        }
+      }
+      continue;
+    }
+
+    if (trimmed === '---') {
+      flushList();
+      flushParagraph();
+      elements.push(<hr key={keyIdx++} className="my-8 border-slate-700/50" />);
+      continue;
+    }
+
+    if (line.startsWith('- ') || line.startsWith('1. ')) {
+      flushParagraph();
+      currentList.push(line);
+      continue;
     }
 
     // Default Paragraph
-    return <p key={idx} className="text-slate-200 text-base leading-loose my-5" dangerouslySetInnerHTML={{ __html: parseInline(block) }} />;
-  });
+    flushList();
+    currentParagraph.push(line);
+  }
+
+  flushList();
+  flushParagraph();
+  flushTable();
+
+  return elements;
 }
 
 export default function BlogDetailPage({ params }: { params: { slug: string } }) {
@@ -159,18 +248,47 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
   const fallbackImage = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80';
 
   // 目次（TOC）の抽出
-  const blocks = post.content.split('\n\n');
-  const toc = blocks.map((block, idx) => {
-    if (block.startsWith('## ')) {
-      return { title: block.replace('## ', '').replace(/\*\*(.*?)\*\*/g, '$1'), id: `heading-${idx}` };
+  const lines = post.content.split('\n');
+  const toc: { title: string, id: string }[] = [];
+  let h2Count = 0;
+  for (const line of lines) {
+    if (line.startsWith('## ')) {
+      toc.push({
+        title: line.replace('## ', '').replace(/\*\*(.*?)\*\*/g, '$1'),
+        id: `heading-${h2Count++}`
+      });
     }
-    return null;
-  }).filter((item): item is { title: string, id: string } => item !== null);
+  }
 
-  // 関連記事の抽出（同じカテゴリ、現在の記事を除く、最大3件）
+  // 関連記事の抽出（同じカテゴリ、現在の記事を除く、最大4件）
   const relatedPosts = postsData
     .filter(p => p.category === post.category && p.slug !== post.slug)
-    .slice(0, 3);
+    .slice(0, 4);
+
+  // 前後の記事の抽出
+  const categoryPosts = postsData.filter(p => p.category === post.category);
+  const catCurrentIndex = categoryPosts.findIndex(p => p.slug === post.slug);
+  
+  let prevPost = null;
+  let nextPost = null;
+
+  if (catCurrentIndex > 0) {
+    prevPost = { slug: categoryPosts[catCurrentIndex - 1].slug, title: categoryPosts[catCurrentIndex - 1].title };
+  } else {
+    const currentIndex = postsData.findIndex(p => p.slug === post.slug);
+    if (currentIndex > 0) {
+      prevPost = { slug: postsData[currentIndex - 1].slug, title: postsData[currentIndex - 1].title };
+    }
+  }
+
+  if (catCurrentIndex >= 0 && catCurrentIndex < categoryPosts.length - 1) {
+    nextPost = { slug: categoryPosts[catCurrentIndex + 1].slug, title: categoryPosts[catCurrentIndex + 1].title };
+  } else {
+    const currentIndex = postsData.findIndex(p => p.slug === post.slug);
+    if (currentIndex >= 0 && currentIndex < postsData.length - 1) {
+      nextPost = { slug: postsData[currentIndex + 1].slug, title: postsData[currentIndex + 1].title };
+    }
+  }
 
   // 文字数と読了目安
   const wordCount = post.content.replace(/\s+/g, '').length;
@@ -183,10 +301,13 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
         {/* メインコンテンツ */}
         <div className="flex-1 min-w-0 max-w-4xl space-y-8">
 
-      <Link href="/blog" className="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors">
-        <ArrowLeft className="w-4 h-4" />
-        <span>記事一覧に戻る</span>
-      </Link>
+      <div className="flex flex-col gap-2">
+        <Link href="/blog" className="inline-flex items-center gap-2 text-sm font-semibold text-slate-400 hover:text-white transition-colors w-fit">
+          <ArrowLeft className="w-4 h-4" />
+          <span>記事一覧に戻る</span>
+        </Link>
+        <Breadcrumb category={post.category} title={post.title} />
+      </div>
 
       <PRBanner />
 
@@ -194,10 +315,13 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
       <div className="glass-card rounded-3xl overflow-hidden border border-white/10 space-y-6">
         
         <div className="relative h-64 sm:h-80 w-full overflow-hidden bg-slate-900">
-          <img
+          <Image
             src={post.imageUrl || fallbackImage}
             alt={post.title}
-            className="w-full h-full object-cover"
+            fill
+            sizes="(max-width: 768px) 100vw, 800px"
+            className="object-cover"
+            priority
           />
           <div className="absolute top-4 left-4 flex gap-2 flex-wrap">
             <span className="text-xs font-bold text-white px-3 py-1 rounded-full bg-blue-600/90 backdrop-blur-md shadow-lg">
@@ -229,6 +353,10 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
           <p className="text-base text-slate-300 leading-relaxed bg-slate-900/80 p-5 rounded-2xl border border-slate-800">
             {post.summary}
           </p>
+
+          <div className="pt-2">
+            <ShareButtons title={post.title} slug={post.slug} />
+          </div>
 
           {/* 冒頭 1. テキストリンク導線 */}
           {post.affiliateOffer && (
@@ -279,17 +407,20 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
         </div>
       </article>
 
+      {/* 前後の記事ナビゲーション */}
+      <ArticleNavigation prevPost={prevPost} nextPost={nextPost} />
+
       {/* 関連記事セクション */}
       {relatedPosts.length > 0 && (
         <div className="space-y-6 pt-4">
           <h2 className="text-xl font-bold text-white flex items-center gap-2">
-            <span>📚 関連記事</span>
+            <span>📚 この記事を読んだ人はこちらも読んでいます</span>
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {relatedPosts.map((rPost) => (
               <Link key={rPost.slug} href={`/blog/${rPost.slug}`} className="glass-card rounded-2xl overflow-hidden border border-white/10 hover:border-blue-500/50 transition-all hover:-translate-y-1 group flex flex-col">
                 <div className="h-32 bg-slate-800 overflow-hidden relative">
-                  <img src={rPost.imageUrl || fallbackImage} alt={rPost.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <Image src={rPost.imageUrl || fallbackImage} alt={rPost.title} fill sizes="(max-width: 768px) 100vw, 300px" className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <div className="p-5 flex flex-col flex-1">
                   <h3 className="text-sm font-bold text-white line-clamp-2 leading-snug mb-2 group-hover:text-blue-300 transition-colors">
@@ -352,6 +483,11 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
 
         </div>
       )}
+
+      {/* Newsletter CTA */}
+      <div className="mt-12">
+        <NewsletterCTA />
+      </div>
 
         </div>
 

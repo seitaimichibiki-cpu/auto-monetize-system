@@ -4,6 +4,7 @@ import { Sparkles, FileText, ArrowRight, Shield, Zap, CheckCircle } from 'lucide
 import { ToolCard, ToolItem } from '@/components/ToolCard';
 import { PostCard, PostItem } from '@/components/PostCard';
 import { PRBanner } from '@/components/PRBanner';
+import { NewsletterCTA } from '@/components/NewsletterCTA';
 
 import toolsData from '@/data/tools.json';
 import postsData from '@/data/posts.json';
@@ -133,6 +134,11 @@ export default function HomePage() {
             <PostCard key={post.id} post={post} />
           ))}
         </div>
+      </section>
+
+      {/* Newsletter CTA Section */}
+      <section className="max-w-3xl mx-auto pt-8">
+        <NewsletterCTA />
       </section>
 
     </div>

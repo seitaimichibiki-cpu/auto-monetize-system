@@ -31,6 +31,8 @@ jobs:
         run: npm run auto-engine
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GSC_SERVICE_ACCOUNT_KEY: ${{ secrets.GSC_SERVICE_ACCOUNT_KEY }}
+          GSC_SITE_URL: ${{ secrets.GSC_SITE_URL }}
 
       - name: Auto-Commit & Push Updated Content & Analytics
         run: |

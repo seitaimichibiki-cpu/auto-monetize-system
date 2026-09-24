@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { FolderOpen, ExternalLink, Sparkles } from 'lucide-react';
 import postsData from '@/data/posts.json';
+import { NewsletterCTA } from '@/components/NewsletterCTA';
 
 interface SidebarAd {
   title: string;
@@ -161,6 +162,9 @@ export const Sidebar: React.FC<{ currentCategory?: string }> = ({ currentCategor
             ))}
         </ul>
       </div>
+
+      {/* ニュースレター CTA */}
+      <NewsletterCTA />
 
       {/* 広告スロット 2 */}
       <div className="glass-card rounded-2xl p-4 border border-white/10 space-y-3">

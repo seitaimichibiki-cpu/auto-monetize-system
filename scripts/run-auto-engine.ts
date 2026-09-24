@@ -7,6 +7,9 @@ import { collectLatestTrends } from '../src/lib/auto-engine/collector';
 import { generateContentForTopic } from '../src/lib/auto-engine/generator';
 import { attachMonetizationOffers } from '../src/lib/auto-engine/monetizer';
 import { publishPost } from '../src/lib/auto-engine/publisher';
+import { analyzePerformanceWithGSC } from '../src/lib/auto-engine/gsc-analytics';
+import * as fs from 'fs';
+import * as path from 'path';
 
 async function main() {
   console.log('====================================================');
@@ -27,8 +30,15 @@ async function main() {
     // Phase 4: 自動パブリッシュ＆ステータス更新
     await publishPost(finalPost);
 
+    // Phase 5: パフォーマンス解析＆リライト候補の自動判定
+    const postsPath = path.join(process.cwd(), 'src/data/posts.json');
+    if (fs.existsSync(postsPath)) {
+      const posts = JSON.parse(fs.readFileSync(postsPath, 'utf-8'));
+      await analyzePerformanceWithGSC(posts);
+    }
+
     console.log('\n====================================================');
-    console.log('✨ 無人パイプライン正常完了: 新規記事と収益導線が自動更新されました。');
+    console.log('✨ 無人パイプライン正常完了: 新規記事と収益導線・アナリティクス解析が更新されました。');
     console.log('====================================================');
   } catch (error) {
     console.error('❌ パイプライン実行中にエラーが発生しました:', error);
@@ -37,3 +47,4 @@ async function main() {
 }
 
 main();
+

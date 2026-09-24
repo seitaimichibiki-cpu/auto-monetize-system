@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Tag, ArrowUpRight } from 'lucide-react';
 import { PRBanner } from './PRBanner';
 
@@ -32,10 +33,12 @@ export const PostCard: React.FC<{ post: PostItem }> = ({ post }) => {
       <div>
         {/* Cover Image */}
         <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-slate-900">
-          <img
+          <Image
             src={post.imageUrl || fallbackImage}
             alt={post.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            fill
+            sizes="(max-width: 768px) 100vw, 800px"
+            className="object-cover group-hover:scale-105 transition-transform duration-500"
           />
           <div className="absolute top-3 left-3 z-10 flex items-center gap-2">
             <span className="text-xs font-bold text-white px-3 py-1 rounded-full bg-blue-600/90 backdrop-blur-md shadow-md">
