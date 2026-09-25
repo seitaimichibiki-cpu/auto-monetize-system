@@ -180,10 +180,15 @@ function renderManablogContent(content: string) {
       flushTable();
     }
 
-    if (trimmed.startsWith('<a ') || trimmed.startsWith('<img ')) {
+    if (trimmed.startsWith('<a ') || trimmed.startsWith('<img ') || trimmed.startsWith('<div ') || trimmed.startsWith('<h2 ') || trimmed.startsWith('</div') || trimmed.startsWith('</h2')) {
       flushList();
       flushParagraph();
-      elements.push(<div key={keyIdx++} dangerouslySetInnerHTML={{ __html: line }} className="my-6 flex justify-center" />);
+      // If it's a rich H2 card with id, track heading ID
+      if (trimmed.includes('class="rich-h2-card"') || trimmed.includes('class="section-header-img"')) {
+        elements.push(<div key={keyIdx++} id={`heading-${h2Count++}`} dangerouslySetInnerHTML={{ __html: line }} className="scroll-mt-24" />);
+      } else {
+        elements.push(<div key={keyIdx++} dangerouslySetInnerHTML={{ __html: line }} />);
+      }
       continue;
     }
 
@@ -251,10 +256,18 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
   const lines = post.content.split('\n');
   const toc: { title: string, id: string }[] = [];
   let h2Count = 0;
-  for (const line of lines) {
+  for (let idx = 0; idx < lines.length; idx++) {
+    const line = lines[idx];
     if (line.startsWith('## ')) {
       toc.push({
         title: line.replace('## ', '').replace(/\*\*(.*?)\*\*/g, '$1'),
+        id: `heading-${h2Count++}`
+      });
+    } else if (line.includes('rich-h2-title')) {
+      const match = line.match(/class="rich-h2-title">(.*?)<\/div>/) || line.match(/<span class="section-title"[^>]*>(.*?)<\/span>/);
+      const extractedTitle = match ? match[1] : `章 ${h2Count + 1}`;
+      toc.push({
+        title: extractedTitle.replace(/<[^>]+>/g, ''),
         id: `heading-${h2Count++}`
       });
     }

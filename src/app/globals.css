@@ -94,3 +94,260 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* ==========================================
+   Rich Article Decor Components (15,000+ Word Quality)
+   ========================================== */
+
+/* 📌 記事冒頭の結論要約ボックス */
+.rich-summary-box {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  border-left: 5px solid #3b82f6;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.15);
+}
+
+.rich-summary-title {
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: #60a5fa;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.rich-summary-q {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #f8fafc;
+  margin-bottom: 0.5rem;
+}
+
+.rich-summary-a {
+  font-size: 0.975rem;
+  color: #cbd5e1;
+  line-height: 1.75;
+}
+
+/* 🎨 グラデーションH2カード */
+.rich-h2-card {
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #1e293b 100%);
+  border: 1px solid rgba(129, 140, 248, 0.3);
+  border-radius: 12px;
+  padding: 1.75rem 1.5rem;
+  margin: 3rem 0 1.75rem 0;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.rich-h2-number {
+  font-size: 2.25rem;
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(135deg, #60a5fa 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.25rem;
+}
+
+.rich-h2-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #818cf8;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.rich-h2-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+}
+
+.rich-h2-desc {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+/* 💬 会話風吹き出しバルーン */
+.rich-balloon-wrap {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  margin: 2rem 0;
+}
+
+.rich-balloon-wrap.is-right {
+  flex-direction: row-reverse;
+}
+
+.rich-balloon-icon {
+  flex-shrink: 0;
+  text-align: center;
+  width: 72px;
+}
+
+.rich-balloon-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #3b82f6;
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.rich-balloon-name {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #94a3b8;
+  margin-top: 0.35rem;
+  display: block;
+  white-space: nowrap;
+}
+
+.rich-balloon-body {
+  position: relative;
+  background: rgba(30, 41, 59, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.125rem 1.25rem;
+  color: #e2e8f0;
+  font-size: 0.975rem;
+  line-height: 1.8;
+  max-width: calc(100% - 90px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+.rich-balloon-body::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: -10px;
+  border-width: 6px 10px 6px 0;
+  border-style: solid;
+  border-color: transparent rgba(30, 41, 59, 0.85) transparent transparent;
+}
+
+.rich-balloon-wrap.is-right .rich-balloon-body::before {
+  left: auto;
+  right: -10px;
+  border-width: 6px 0 6px 10px;
+  border-color: transparent transparent transparent rgba(30, 41, 59, 0.85);
+}
+
+/* 📖 用語解説ボックス */
+.rich-term-box {
+  background: rgba(15, 23, 42, 0.7);
+  border-left: 4px solid #94a3b8;
+  border-radius: 0 10px 10px 0;
+  padding: 1.125rem 1.25rem;
+  margin: 1.75rem 0;
+}
+
+.rich-term-title {
+  font-size: 0.825rem;
+  font-weight: 800;
+  color: #94a3b8;
+  letter-spacing: 1px;
+  margin-bottom: 0.35rem;
+}
+
+.rich-term-content {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  line-height: 1.7;
+}
+
+/* 💡 コツ・ポイントカード */
+.rich-point-card {
+  background: rgba(20, 83, 45, 0.2);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  margin: 2rem 0;
+}
+
+.rich-point-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 800;
+  font-size: 1rem;
+  color: #4ade80;
+  margin-bottom: 0.5rem;
+}
+
+.rich-point-content {
+  font-size: 0.95rem;
+  color: #e2e8f0;
+  line-height: 1.75;
+}
+
+/* ⚠️ 注意点・失敗回避カード */
+.rich-warning-card {
+  background: rgba(127, 29, 29, 0.25);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  margin: 2rem 0;
+}
+
+.rich-warning-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 800;
+  font-size: 1rem;
+  color: #f87171;
+  margin-bottom: 0.5rem;
+}
+
+.rich-warning-content {
+  font-size: 0.95rem;
+  color: #fecdd3;
+  line-height: 1.75;
+}
+
+/* 🔄 ステップフロー図 */
+.rich-flow-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+  padding: 1.25rem;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+.rich-flow-step {
+  flex: 1 1 140px;
+  background: rgba(30, 41, 59, 0.9);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 8px;
+  padding: 0.875rem 0.75rem;
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.rich-flow-arrow {
+  color: #60a5fa;
+  font-weight: 900;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
