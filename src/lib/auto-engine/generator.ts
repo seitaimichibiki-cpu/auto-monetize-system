@@ -89,6 +89,12 @@ export async function generateContentForTopic(topic: TrendTopic): Promise<Genera
 
   const flowChart = `<div class="rich-flow-container"><div class="rich-flow-step">1. テーマ＆需要リサーチ</div><div class="rich-flow-arrow">➔</div><div class="rich-flow-step">2. AIで原稿・構成生成</div><div class="rich-flow-arrow">➔</div><div class="rich-flow-step">3. 人間によるレビュー・最適化</div><div class="rich-flow-arrow">➔</div><div class="rich-flow-step">4. 自動配信ツール連携</div><div class="rich-flow-arrow">➔</div><div class="rich-flow-step">5. 収益発生＆データ改善</div></div>`;
 
+  const inlineCta1 = `<div class="my-6 p-4 bg-slate-800/90 border border-blue-500/40 rounded-xl text-center"><p class="font-bold text-white mb-2">🎓 ${topic.category}のスキルを短期間で本格習得するなら</p><a href="https://px.a8.net/svt/ejp?a8mat=4BCFNP+BA1NCI+5VEK+5YRHE" target="_blank" rel="noopener noreferrer" class="inline-block px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-lg hover:from-blue-500 hover:to-indigo-500 transition-all shadow-lg">» DMM 生成AI CAMP 学び放題の公式詳細はこちら（無料相談あり）</a></div>`;
+
+  const inlineCta2 = `<div class="my-6 p-4 bg-slate-800/90 border border-blue-500/40 rounded-xl text-center"><p class="font-bold text-white mb-2">🌐 ブログ・WEBメディア構築に必須の高速サーバー</p><a href="https://px.a8.net/svt/ejp?a8mat=4BCFNP+7LVF1U+50+35UAKX" target="_blank" rel="noopener noreferrer" class="inline-block px-6 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold rounded-lg hover:from-cyan-500 hover:to-blue-500 transition-all shadow-lg">» お名前.com 高速レンタルサーバー公式サイト（初期費用0円）</a></div>`;
+
+  const inlineCta3 = `<div class="my-6 p-4 bg-slate-800/90 border border-blue-500/40 rounded-xl text-center"><p class="font-bold text-white mb-2">📑 副業収益の確定申告・経理を自動化するなら</p><a href="https://px.a8.net/svt/ejp?a8mat=4BCFNP+B8US4Y+2PEO+1HSASH" target="_blank" rel="noopener noreferrer" class="inline-block px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold rounded-lg hover:from-emerald-500 hover:to-teal-500 transition-all shadow-lg">» 【クラウド会計シェアNo.1】freee 確定申告を無料で試す</a></div>`;
+
   const content = `本記事では、「${topic.keyword}について深く理解し、実際に稼げる仕組みを構築したい」という方向けに、最新データに基づいたノウハウを15,000文字超の圧倒的ボリュームで徹底解説します。
 
 ${summaryBox}
@@ -106,6 +112,9 @@ ${h2Card1}
 
 ${balloon1}
 
+» 参考： [【初心者向け】AI文章生成ツールで月3万円を稼ぐ具体的な方法](/blog/ai-writing-earn-money)<br />
+» 参考： [【保存版】プログラミング未経験からAI副業を始める3ステップ](/blog/programming-beginner-ai-side-job)
+
 ### 1-1. 自動収益化の3つのレイヤー構造
 
 1. **設計レイヤー（人間）**: どのターゲットに何を売るか、どう導線を敷くか
@@ -121,6 +130,11 @@ ${termBox1}
 ---
 
 ${h2Card2}
+
+${inlineCta2}
+
+» 参考： [【2026年比較】レンタルサーバーおすすめ3選【ブログ用途で厳選】](/blog/rental-server-comparison)<br />
+» 参考： [【始め方】アフィリエイトブログで月1万円を稼ぐ全手順](/blog/affiliate-blog-start)
 
 ${topic.suggestedAngle}において、実用性が高く収益化に直結する5つのモデルを紹介します。
 
@@ -145,6 +159,11 @@ ${balloon2}
 
 ${h2Card3}
 
+${inlineCta1}
+
+» 参考： [【最短ルート】IT・AIスキルを効率的に身につける学習戦略](/blog/it-ai-skill-learning)<br />
+» 参考： [【実践SEO】検索1位を取るためのブログ記事の書き方](/blog/seo-blog-writing)
+
 実際に「${topic.keyword}」の自動化システムを構築するための具体的なステップを解説します。
 
 ### Step 1: ユーザーの悩みと需要のリサーチ
@@ -157,6 +176,11 @@ AIに抽象的な指示を出すのではなく、「読者のペルソナ」「
 AIの出力内容に事実誤認がないか確認し、自分自身の体験談や独自の比較データを追加します。これで他社記事との差別化が完了します。
 
 ${warningCard1}
+
+${inlineCta3}
+
+» 参考： [【完全マニュアル】フリーランスとして独立するための全ステップ](/blog/freelance-independence-guide)<br />
+» 参考： [【2026年最新】仕事の生産性を10倍にするAIツール活用完全ガイド](/blog/ai-tools-productivity-guide)
 
 ---
 
