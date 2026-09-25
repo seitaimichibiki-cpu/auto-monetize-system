@@ -91,14 +91,22 @@ const AFFILIATE_OFFER_POOL = [
     url: 'https://px.a8.net/svt/ejp?a8mat=4BCFNP+B8US4Y+2PEO+1HSASH',
     sponsor: 'freee株式会社',
     priceInfo: '確定申告・経理をAIで自動化'
+  },
+  {
+    title: '【生成AI学び放題】DMM 生成AI CAMP - 最新AI技術を実践習得',
+    url: 'https://px.a8.net/svt/ejp?a8mat=4BCFNP+BA1NCI+5VEK+5YRHE',
+    sponsor: 'DMM.com（生成AI CAMP）',
+    priceInfo: '生成AIスキルが学び放題・実践型カリキュラム',
+    bannerImgUrl: 'https://www29.a8.net/svt/bgt?aid=260920645682&wid=001&eno=01&mid=s00000027398001003000&mc=1',
+    trackingImgUrl: 'https://www12.a8.net/0.gif?a8mat=4BCFNP+BA1NCI+5VEK+5YRHE'
   }
 ];
 
 const CATEGORY_OFFER_MAP: Record<string, number[]> = {
-  'AI副業・自動化': [8, 0, 5],
+  'AI副業・自動化': [10, 8, 0, 5],
   'AIガジェット': [1, 2],
-  'AIテクノロジー': [2, 1],
-  'プログラミング': [4, 5],
+  'AIテクノロジー': [10, 2, 1],
+  'プログラミング': [10, 4, 5],
   'セキュリティ': [3, 0],
   'SaaS・Webツール': [0, 6],
   'コンプライアンス': [6, 0],
