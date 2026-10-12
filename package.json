@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "auto-engine": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' scripts/run-auto-engine.ts"
+    "auto-engine": "echo 'auto-engine は停止中です（2026-10-13 停止）' && exit 1"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
