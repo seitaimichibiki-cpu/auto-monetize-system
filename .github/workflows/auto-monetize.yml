@@ -1,16 +1,16 @@
 name: 24/7 AI Autonomous Monetization Pipeline
 
+# 2026-10-13 収益化に至らなかったため自動実行を停止（cron削除）。
+# 再開する場合は docs/postmortem を読んでから、実測データ基盤を整えること。
 on:
-  schedule:
-    # 毎日 午前9時 (UTC 0:00) に完全自動実行
-    - cron: '0 0 * * *'
-  workflow_dispatch: # 手動でのテストトリガーも可能
+  workflow_dispatch: # 手動トリガーのみ（下記 if: false で実質無効）
 
 permissions:
   contents: write
 
 jobs:
   auto-monetize:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
